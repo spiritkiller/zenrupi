@@ -20,13 +20,14 @@ asset_code = "ZP"
 asset = Asset(asset_code, Keypair.from_secret(issuer_secret).public_key)
 
 # İşlem Oluştur
+destination_address = "GC4HDV2H3PRIAPE32R3QU5PXAMAJ6FB5VKZXDR6ZZQPTXNMMQXEDEX3V"  # Buraya farklı bir cüzdanın public key'ini yaz!
 transaction = (
     TransactionBuilder(
         source_account=distribution_account,
         network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE,
         base_fee=100
     )
-    .append_payment_op(destination=distribution_public, amount="1000", asset=asset)
+    .append_payment_op(destination=destination_address, amount="1000", asset=asset)  # ✅ Hedef adres güncellendi!
     .set_timeout(30)
     .build()
 )
