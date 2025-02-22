@@ -1,5 +1,8 @@
-mkdir -p scripts
-touch scripts/create_wallet.py
-git add scripts/create_wallet.py
-git commit -m "Create wallet script added"
-git push
+from stellar_sdk import Keypair
+
+# Yeni bir Stellar cüzdanı oluştur
+keypair = Keypair.random()
+
+print(f"Public Key: {keypair.public_key}")
+print(f"Secret Key: {keypair.secret}")
+
