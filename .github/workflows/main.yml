@@ -24,8 +24,8 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-          - name: 📝 .env Dosyasını Oluştur
-          run: |
+      - name: 📝 .env Dosyasını Oluştur
+        run: |
           echo "ISSUER_SECRET_KEY=${{ secrets.ISSUER_SECRET_KEY }}" >> .env
           echo "DISTRIBUTION_SECRET_KEY=${{ secrets.DISTRIBUTION_SECRET_KEY }}" >> .env
           echo "DISTRIBUTION_PUBLIC_KEY=${{ secrets.DISTRIBUTION_PUBLIC_KEY }}" >> .env
