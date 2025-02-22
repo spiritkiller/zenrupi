@@ -23,7 +23,7 @@ transaction = (
         base_fee=100
     )
     .add_text_memo("ZenRupi transferi")
-    .append_payment_op(destination=destination_address, amount="10", asset=Asset.native())  
+    .append_payment_op(destination=destination_address, amount="100000", asset=Asset.native())  
     .set_timeout(300)  # ⏳ 5 dakikalık zaman sınırı
     .build()
 )
