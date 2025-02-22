@@ -22,20 +22,38 @@ distribution_keypair = Keypair.from_secret(distribution_secret)
 zenrupi_asset = Asset("ZP", issuer_keypair.public_key)
 
 # Tokeni Dağıtıcı Hesaba Gönder
-transaction = (
+trust_transaction = (
+    TransactionBuilder(
+        source_account=server.load_account(distribution_public),
+        network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE,
+        base_fee=100
+    )
+    .append_change_trust_op(asset=zenrupi_asset, limit="10000000")
+    .set_timeout(300)
+    .build()
+)
+
+trust_transaction.sign(distribution_keypair)
+trust_response = server.submit_transaction(trust_transaction)
+print(f"✅ Trustline başarıyla açıldı! Transaction Hash: {trust_response['hash']}")
+
+
+
+# İşlemi imzala ve gönder
+transfer_transaction = (
     TransactionBuilder(
         source_account=issuer_account,
         network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE,
         base_fee=100
     )
-    .append_change_trust_op(asset=zenrupi_asset, limit="10000000")  # Limit belirtiyoruz
     .append_payment_op(destination=distribution_public, amount="1000000", asset=zenrupi_asset)
     .set_timeout(300)
     .build()
 )
 
-# İşlemi imzala ve gönder
-transaction.sign(issuer_keypair)
-response = server.submit_transaction(transaction)
+transfer_transaction.sign(issuer_keypair)
+transfer_response = server.submit_transaction(transfer_transaction)
+print(f"✅ ZenRupi Tokeni başarıyla transfer edildi! Transaction Hash: {transfer_response['hash']}")
+
 
 print(f"✅ ZenRupi Tokeni Oluşturuldu! Transaction Hash: {response['hash']}")
