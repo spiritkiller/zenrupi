@@ -1,2 +1,2 @@
-stellar-sdk
+stellar-sdk==12.1.0
 requests
