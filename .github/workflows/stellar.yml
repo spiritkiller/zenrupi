@@ -19,9 +19,6 @@ jobs:
           sudo apt install -y python3-pip
           pip3 install stellar-sdk requests
 
-      - name: 🌐 Stellar Cüzdanı Oluştur
-        run: python3 scripts/create_wallet.py
-
       - name: ✅ Stellar Testnet'ten XLM Al
         run: python3 scripts/fund_wallet.py
 
