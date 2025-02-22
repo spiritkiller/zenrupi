@@ -1,0 +1,2 @@
+- name: 🌐 Stellar Cüzdanı Oluştur
+        run: python3 scripts/create_wallet.py
