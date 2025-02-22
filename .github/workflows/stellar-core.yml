@@ -1,0 +1,16 @@
+name: Stellar-Core Setup
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stellar-Core Kurulumu
+        run: |
+          sudo apt update
+          sudo apt install -y git cmake clang libpq-dev
+          git clone https://github.com/stellar/stellar-core.git
+          cd stellar-core
+          make -j$(nproc)
+          sudo make install
