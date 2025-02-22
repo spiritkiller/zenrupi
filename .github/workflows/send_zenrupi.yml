@@ -15,8 +15,7 @@ jobs:
         run: |
           python3 -m venv venv
           source venv/bin/activate
-          pip install -r requirements.txt  # Eğer `requirements.txt` varsa
-          pip install stellar-sdk
+          pip install -r requirements.txt  # Bağımlılıkları kur
 
       - name: 🔑 Ortam Değişkenlerini Ayarla
         env:
