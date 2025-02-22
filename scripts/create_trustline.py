@@ -1,6 +1,14 @@
 import os
 from stellar_sdk import Server, Keypair, TransactionBuilder, Network, Asset
 
+# Debugging için çevresel değişkenleri yazdır
+print(f"ISSUER_SECRET_KEY: {os.getenv('ISSUER_SECRET_KEY')}")
+print(f"DISTRIBUTION_SECRET_KEY: {os.getenv('DISTRIBUTION_SECRET_KEY')}")
+print(f"DISTRIBUTION_PUBLIC_KEY: {os.getenv('DISTRIBUTION_PUBLIC_KEY')}")
+
+from stellar_sdk import Server, Keypair, TransactionBuilder, Network, Asset
+
+
 server = Server("https://horizon-testnet.stellar.org")
 distribution_secret = os.getenv("DISTRIBUTION_SECRET_KEY")
 distribution_keypair = Keypair.from_secret(distribution_secret)
