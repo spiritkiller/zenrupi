@@ -33,3 +33,10 @@ jobs:
           DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
           DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
         run: python3 scripts/create_trustline.py
+
+        - name: ZenRupi Token Gönder
+        env:
+          ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
+          DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
+          DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
+        run: python3 scripts/send_zenrupi.py
