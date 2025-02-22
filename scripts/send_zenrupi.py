@@ -5,7 +5,7 @@ server = Server("https://horizon-testnet.stellar.org")
 distribution_secret = os.getenv("DISTRIBUTION_SECRET_KEY")
 distribution_keypair = Keypair.from_secret(distribution_secret)
 
-destination = os.getenv("RECIPIENT_PUBLIC_KEY")
+destination = os.getenv("DISTRIBUTION_PUBLIC_KEY")
 issuer_public = os.getenv("ISSUER_PUBLIC_KEY")
 asset_code = "ZP"
 asset = Asset(asset_code, issuer_public)
