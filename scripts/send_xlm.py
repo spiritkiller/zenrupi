@@ -1,12 +1,12 @@
 import os
-from stellar_sdk import Server, Keypair, TransactionBuilder, Network
+from stellar_sdk import Server, Keypair, TransactionBuilder, Network, Asset
 
 # Stellar Horizon API'ye bağlan
 server = Server(horizon_url="https://horizon-testnet.stellar.org")
 
 # Çevresel değişkenlerden gizli bilgileri al
-source_secret = os.getenv("SECRET_KEY")  # GitHub Secrets içine eklediğin özel anahtar
-destination_address = os.getenv("DESTINATION_ADDRESS")  # Hedef adres
+source_secret = os.getenv("SECRET_KEY")  # Gönderen cüzdanın gizli anahtarı
+destination_address = os.getenv("DESTINATION_ADDRESS")  # Alıcı cüzdanın public key'i
 
 if not source_secret or not destination_address:
     raise ValueError("❌ Gerekli çevresel değişkenler bulunamadı. Lütfen SECRET_KEY ve DESTINATION_ADDRESS ayarlarını yapın.")
@@ -23,7 +23,7 @@ transaction = (
         base_fee=100
     )
     .add_text_memo("ZenRupi transferi")
-    .append_payment_op(destination=destination_address, amount="10", asset_code="XLM")
+    .append_payment_op(destination=destination_address, amount="10", asset=Asset.native())  # XLM gönder
     .build()
 )
 
