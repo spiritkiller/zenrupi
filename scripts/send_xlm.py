@@ -5,8 +5,8 @@ from stellar_sdk import Server, Keypair, TransactionBuilder, Network
 server = Server(horizon_url="https://horizon-testnet.stellar.org")
 
 # Çevresel değişkenlerden gizli bilgileri al
-source_secret = os.getenv("SECRET_KEY")  # GitHub Secrets içine eklediğin özel anahtar
-destination_address = os.getenv("DESTINATION_ADDRESS")  # Hedef adres
+source_secret = os.getenv("SCFH3JXWZY5B2H63A7VHR6HFLKKIMKNKQAM7CDLXHRSVWINWNW37S6TG")  # GitHub Secrets içine eklediğin özel anahtar
+destination_address = os.getenv("GBUYB7CFOFUAGHZUZYDHCTQLDIMQ542NLZEEPFTGZOZ3W3KZP4VTGIQ2")  # Hedef adres
 
 if not source_secret or not destination_address:
     raise ValueError("Gerekli çevresel değişkenler bulunamadı. Lütfen SECRET_KEY ve DESTINATION_ADDRESS ayarlarını yapın.")
