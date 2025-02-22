@@ -1,33 +1,35 @@
-name: ZenRupi CI/CD
+name: Create Trustline
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  create_trustline:
     runs-on: ubuntu-latest
     steps:
-      - name: Repo'yu Klonla
-        uses: actions/checkout@v3
+      - name: Repo'yu Kopyala
+        uses: actions/checkout@v4
 
-      - name: Python Kur
+      - name: Python'u Kur
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Gerekli Paketleri Yükle
+      - name: Gerekli Paketleri Kur
         run: pip install -r requirements.txt
 
-      - name: Wallet Oluştur
-        run: python3 scripts/create_wallet.py
+      - name: DEBUG - Secrets Yüklendi Mi?
+        run: |
+          echo "ISSUER_SECRET_KEY=${{ secrets.ISSUER_SECRET_KEY }}"
+          echo "DISTRIBUTION_SECRET_KEY=${{ secrets.DISTRIBUTION_SECRET_KEY }}"
+          echo "DISTRIBUTION_PUBLIC_KEY=${{ secrets.DISTRIBUTION_PUBLIC_KEY }}"
 
-      - name: XLM Yükle
-        run: python3 scripts/fund_wallet.py
-
-      - name: Trustline Aç
+      - name: Trustline Oluştur
+        env:
+          ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
+          DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
+          DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
         run: python3 scripts/create_trustline.py
-
-      - name: ZenRupi Tokeni Oluştur
-        run: python3 scripts/create_zenrupi.py
-
-      - name: ZenRupi Gönder
-        run: python3 scripts/send_zenrupi.py
