@@ -1,34 +1,33 @@
-name: ZenRupi Transactions
+name: ZenRupi CI/CD
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Repo'yu Klonla
         uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v3
+      - name: Python Kur
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+      - name: Gerekli Paketleri Yükle
+        run: pip install -r requirements.txt
 
-      - name: Create Trustline
+      - name: Wallet Oluştur
+        run: python3 scripts/create_wallet.py
+
+      - name: XLM Yükle
+        run: python3 scripts/fund_wallet.py
+
+      - name: Trustline Aç
         run: python3 scripts/create_trustline.py
-        env:
-          ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
-          DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
-          DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
 
-      - name: Send ZenRupi Token
+      - name: ZenRupi Tokeni Oluştur
+        run: python3 scripts/create_zenrupi.py
+
+      - name: ZenRupi Gönder
         run: python3 scripts/send_zenrupi.py
-        env:
-          ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
-          DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
-          DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
