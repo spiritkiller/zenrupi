@@ -1,0 +1,47 @@
+name: ZenRupi Stellar Deployment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repositori’yi çek
+        uses: actions/checkout@v3
+
+      - name: Python'u kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Ortam değişkenlerini yükle
+        run: |
+          echo "ISSUER_SECRET_KEY=${{ secrets.ISSUER_SECRET_KEY }}" >> $GITHUB_ENV
+          echo "DISTRIBUTION_SECRET_KEY=${{ secrets.DISTRIBUTION_SECRET_KEY }}" >> $GITHUB_ENV
+          echo "DISTRIBUTION_PUBLIC_KEY=${{ secrets.DISTRIBUTION_PUBLIC_KEY }}" >> $GITHUB_ENV
+
+      - name: Gerekli bağımlılıkları yükle
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Hesapları kontrol et
+        run: python3 scripts/check_accounts.py
+
+      - name: Trustline oluştur
+        run: python3 scripts/create_trustline.py
+
+      - name: ZenRupi oluştur ve dağıt
+        run: python3 scripts/create_zenrupi.py
+
+      - name: ZenRupi gönder
+        run: python3 scripts/send_zenrupi.py
+
+      - name: İşlem tamamlandı 🎉
+        run: echo "ZenRupi Stellar işlemleri başarıyla tamamlandı!"
+
