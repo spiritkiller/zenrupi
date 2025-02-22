@@ -9,15 +9,18 @@ jobs:
     steps:
       - name: 🛠️ Git Repo'yu Klonla
         uses: actions/checkout@v3
+        with:
+          submodules: true   # Alt modülleri (submodules) klonla
+          fetch-depth: 0      # Tüm geçmişi al (bazı klon hatalarını önler)
 
       - name: 🏗️ Gerekli Paketleri Kur
         run: |
           sudo apt update
           sudo apt install -y git cmake clang libpq-dev postgresql libsqlite3-dev
 
-      - name: 🌐 Stellar-Core'u Klonla
+      - name: 🌐 Stellar-Core'u Klonla ve Submodules Güncelle
         run: |
-          git clone https://github.com/stellar/stellar-core.git
+          git clone --recursive https://github.com/stellar/stellar-core.git
           cd stellar-core
           git submodule update --init --recursive
 
