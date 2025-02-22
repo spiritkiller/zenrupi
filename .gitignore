@@ -1,32 +1,18 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
+# Derleme ve geçici dosyalar
+/build/
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
 *.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
 *.a
-*.lib
-
-# Executables
-*.exe
 *.out
-*.app
+*.exe
+*.log
+*.cache
+
+# Çalıştırılabilir dosyalar
+stellar-core
+stellar-core.db
+
+# SSH veya API anahtarlarını içeren dosyalar (ÖNEMLİ!)
+.env
+config.json
+stellar-core.cfg
