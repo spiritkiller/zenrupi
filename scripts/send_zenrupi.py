@@ -41,7 +41,7 @@ transaction = (
         network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE,
         base_fee=100
     )
-    .append_payment_op(destination=distribution_public, amount="1000000", asset=asset)  # ✅ Hedef adres güncellendi!
+    .append_payment_op(destination=distribution_public, amount="10000000", asset=asset)  # ✅ Hedef adres güncellendi!
     .set_timeout(30)
     .build()
 )
