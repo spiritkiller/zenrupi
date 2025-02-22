@@ -4,7 +4,7 @@ from stellar_sdk import Server, Keypair, TransactionBuilder, Network, Asset
 # 🔥 GitHub Secrets'ten ortam değişkenlerini al
 issuer_secret = os.getenv("ISSUER_SECRET_KEY")
 distribution_secret = os.getenv("DISTRIBUTION_SECRET_KEY")
-distribution_public = os.getenv("GC4HDV2H3PRIAPE32R3QU5PXAMAJ6FB5VKZXDR6ZZQPTXNMMQXEDEX3V")
+distribution_public = os.getenv("DISTRIBUTION_PUBLIC_KEY")
 
 # 🔴 Eğer değişkenler yüklenmediyse hata ver
 if not issuer_secret or not distribution_secret or not distribution_public:
