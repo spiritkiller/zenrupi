@@ -27,3 +27,7 @@ jobs:
 
       - name: 💸 XLM Gönder
         run: python3 scripts/send_xlm.py
+
+      - name: 📂 Çalışma Dizinini ve Dosyaları Listele
+        run: ls -la
+
