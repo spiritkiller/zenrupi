@@ -20,7 +20,7 @@ jobs:
           python-version: '3.10'
 
       - name: Ortam değişkenlerini yükle
-       env:
+        env:
         ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
         DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
         DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
