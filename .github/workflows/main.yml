@@ -1,4 +1,4 @@
-name: Create Trustline
+name: Deploy ZenRupi Token
 
 on:
   push:
@@ -7,34 +7,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  create_trustline:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Repo'yu Kopyala
+      - name: 📥 Reposu Kopyala
         uses: actions/checkout@v4
 
-      - name: Python'u Kur
+      - name: 🐍 Python'u Kur
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Gerekli Paketleri Kur
-        run: pip install -r requirements.txt
-
-      - name: DEBUG - Secrets Yüklendi Mi?
+      - name: 📦 Gerekli Bağımlılıkları Yükle
         run: |
-          echo "ISSUER_SECRET_KEY=${{ secrets.ISSUER_SECRET_KEY }}"
-          echo "DISTRIBUTION_SECRET_KEY=${{ secrets.DISTRIBUTION_SECRET_KEY }}"
-          echo "DISTRIBUTION_PUBLIC_KEY=${{ secrets.DISTRIBUTION_PUBLIC_KEY }}"
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Trustline Oluştur
+      - name: 🔍 Hesapları Kontrol Et
+        env:
+          ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
+          DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
+          DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
+        run: python3 scripts/check_accounts.py
+
+      - name: 🚀 Trustline Oluştur
         env:
           ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
           DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
           DISTRIBUTION_PUBLIC_KEY: ${{ secrets.DISTRIBUTION_PUBLIC_KEY }}
         run: python3 scripts/create_trustline.py
 
-        - name: ZenRupi Token Gönder
+      - name: 💸 ZenRupi Token Gönder
         env:
           ISSUER_SECRET_KEY: ${{ secrets.ISSUER_SECRET_KEY }}
           DISTRIBUTION_SECRET_KEY: ${{ secrets.DISTRIBUTION_SECRET_KEY }}
