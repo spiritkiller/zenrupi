@@ -1,5 +1,20 @@
 import os
 from stellar_sdk import Server, Keypair, TransactionBuilder, Network, Asset
+from dotenv import load_dotenv
+
+# 🔥 .env dosyasını yükle
+load_dotenv()
+
+# 🔥 Ortam değişkenlerini al
+issuer_secret = os.getenv("ISSUER_SECRET_KEY")
+distribution_secret = os.getenv("DISTRIBUTION_SECRET_KEY")
+distribution_public = os.getenv("DISTRIBUTION_PUBLIC_KEY")
+
+# 🔥 Değerleri kontrol et
+print(f"Issuer Secret Key: {issuer_secret[:5]}... (Gizlendi)")
+print(f"Distribution Secret Key: {distribution_secret[:5]}... (Gizlendi)")
+print(f"Distribution Public Key: {distribution_public}")
+
 
 # 🔥 GitHub Secrets'ten ortam değişkenlerini al
 issuer_secret = os.getenv("ISSUER_SECRET_KEY")
