@@ -28,7 +28,7 @@ transaction = (
         network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE,
         base_fee=100
     )
-    .append_change_trust_op(asset=zenrupi_asset, source=distribution_public)
+    .append_change_trust_op(asset=zenrupi_asset, limit="10000000")  # Limit belirtiyoruz
     .append_payment_op(destination=distribution_public, amount="1000000", asset=zenrupi_asset)
     .set_timeout(300)
     .build()
