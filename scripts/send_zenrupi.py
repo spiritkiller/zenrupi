@@ -28,3 +28,12 @@ transaction = (
         base_fee=100
     )
     .append_payment_op(destination=distribution_public, amount="50", asset=asset)
+    .set_timeout(30)
+    .build()
+)
+
+# İşlemi imzala ve gönder
+transaction.sign(distribution_keypair)
+response = server.submit_transaction(transaction)
+
+print(f"✅ ZenRupi Gönderildi! İşlem Hash: {response['hash']}")
