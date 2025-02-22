@@ -2,11 +2,10 @@ import os
 from stellar_sdk import Server, Keypair, TransactionBuilder, Network, Asset
 
 
-# Çevresel değişkenleri elle tanımla
-ISSUER_SECRET_KEY="SCZVV4BZXR3CKYC66DG2FJ5IM3QNAKEXZQHKKOGCHS5LPSOXKZXESMLH"
-ISSUER_PUBLIC_KEY="GC4HDV2H3PRIAPE32R3QU5PXAMAJ6FB5VKZXDR6ZZQPTXNMMQXEDEX3V"
-DISTRIBUTION_SECRET_KEY="SAPDRIYXLMLN6XFIHI55ZJPQSO3GF43S64AXRJ6PIGAWZLUTUV32UM2P"
-DISTRIBUTION_PUBLIC_KEY="GAL7BEI2I5TO3GJBDADFEA356QP46YHBDJM7GQAYVFAY4FT2SM5XULFF"
+# 🔥 GitHub Secrets'ten ortam değişkenlerini al
+issuer_secret = os.getenv("ISSUER_SECRET_KEY")
+distribution_secret = os.getenv("DISTRIBUTION_SECRET_KEY")
+distribution_public = os.getenv("DISTRIBUTION_PUBLIC_KEY")
 
 # Stellar Ağına Bağlan
 server = Server(horizon_url="https://horizon-testnet.stellar.org")
