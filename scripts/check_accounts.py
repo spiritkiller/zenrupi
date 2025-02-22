@@ -1,3 +1,4 @@
+import os  # Eksik olan os modülünü ekledik!
 from stellar_sdk import Server
 
 server = Server("https://horizon-testnet.stellar.org")
