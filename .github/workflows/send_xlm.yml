@@ -1,0 +1,28 @@
+name: Send XLM on Stellar Testnet
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send_xlm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Depoyu Klonla
+        uses: actions/checkout@v3
+
+      - name: Python Kurulumu
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Gerekli Paketleri Yükle
+        run: pip install stellar-sdk
+
+      - name: XLM Gönder
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DESTINATION_ADDRESS: ${{ secrets.DESTINATION_ADDRESS }}
+        run: python send_xlm.py
