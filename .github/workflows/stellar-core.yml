@@ -1,16 +1,35 @@
-name: Stellar-Core Setup
+name: Stellar-Core CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Stellar-Core Kurulumu
+      - name: 🛠️ Git Repo'yu Klonla
+        uses: actions/checkout@v3
+
+      - name: 🏗️ Gerekli Paketleri Kur
         run: |
           sudo apt update
-          sudo apt install -y git cmake clang libpq-dev
+          sudo apt install -y git cmake clang libpq-dev postgresql libsqlite3-dev
+
+      - name: 🌐 Stellar-Core'u Klonla
+        run: |
           git clone https://github.com/stellar/stellar-core.git
           cd stellar-core
+          git submodule update --init --recursive
+
+      - name: 🏗️ Stellar-Core'u Derle
+        run: |
+          cd stellar-core
+          mkdir -p build
+          cd build
+          cmake ..
           make -j$(nproc)
-          sudo make install
+
+      - name: ✅ Stellar-Core'un Kurulup Kurulmadığını Kontrol Et
+        run: |
+          cd stellar-core/build
+          ./stellar-core --version
